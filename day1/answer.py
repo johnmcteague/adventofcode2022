@@ -1,5 +1,17 @@
-with open('input') as f:
-    lines = f.readlines()
+elves = []
 
+with open('input', 'r', encoding='utf-8') as f:
+    lines = f.readlines()
+    elf = 0
+
+    running_total = 0
     for line in lines:
-        print(line)
+        if line == '\n':
+            elves.append(running_total)
+            elf = elf + 1
+            running_total = 0
+        else:
+            running_total = running_total + int(line)
+
+elves.sort(reverse=True)
+print(elves[0])
