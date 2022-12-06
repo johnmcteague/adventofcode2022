@@ -15,3 +15,4 @@ with open('input', 'r', encoding='utf-8') as f:
 
 elves.sort(reverse=True)
 print(elves[0])
+print(elves[0] + elves[1] + elves[2])
