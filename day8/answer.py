@@ -57,8 +57,61 @@ def count_visible(grid):
     return num_visibile
 
 
+def scenic_scores(grid) ->list:
+    scores = []
+    
+
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            current_height = grid[row][col]
+            left = 0
+            right = 0
+            top = 0
+            bottom = 0
+
+            for i in range(col-1, -1, -1):
+                x = grid[row][i]
+                if current_height > x:
+                    left += 1
+                else:
+                    left += 1
+                    break
+
+            for i in range(col+1, len(grid[row]), 1):
+                x = grid[row][i]
+                if current_height > x:
+                    right += 1
+                else:
+                    right += 1
+                    break
+
+            for i in range(row+1, len(grid), 1):
+                x = grid[i][col]
+                if current_height > x:
+                    bottom += 1
+                else:
+                    bottom += 1
+                    break
+                    
+            for i in range(row-1, -1, -1):
+                x = grid[i][col]
+                if current_height > x:
+                    top += 1
+                else:
+                    top += 1
+                    break
+
+            score = (left * right * top * bottom)
+            scores.append(score)
+            
+    return scores
+
+
 with open('/workspaces/adventofcode2022/day8/input', 'r') as f:
     lines = f.read().splitlines()
 
 grid = build_grid(lines)
 print(count_visible(grid))
+scores = scenic_scores(grid)
+scores.sort(reverse=True)
+print(scores[0])
